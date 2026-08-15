@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #certificate-print-area, #certificate-print-area * {
+    visibility: visible;
+  }
+  #certificate-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw !important;
+    height: 56.25vw !important; /* 16:9 ratio */
+    max-width: none !important;
+    border-width: 6px !important;
+    margin: 0 !important;
+    padding: 20px !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

@@ -1,0 +1,58 @@
+import { Badge } from '../types';
+
+export const INITIAL_BADGES: Badge[] = [
+  {
+    id: 'first_card',
+    title: 'Bé Chăm Học',
+    description: 'Khám phá 5 thẻ con vật',
+    icon: '🌟',
+    unlocked: false,
+    requiredCount: 5,
+    currentCount: 0,
+  },
+  {
+    id: 'animal_explorer',
+    title: 'Thám Hiểm Rừng Xanh',
+    description: 'Khám phá tất cả 24 con vật',
+    icon: '🦁',
+    unlocked: false,
+    requiredCount: 24,
+    currentCount: 0,
+  },
+  {
+    id: 'quiz_master_5',
+    title: 'Thần Đồng Đố Vui',
+    description: 'Trả lời đúng 5 câu đố con vật',
+    icon: '🏆',
+    unlocked: false,
+    requiredCount: 5,
+    currentCount: 0,
+  },
+  {
+    id: 'sound_detective',
+    title: 'Thính Tai Tinh Mắt',
+    description: 'Đoán đúng 5 tiếng kêu con vật',
+    icon: '👂',
+    unlocked: false,
+    requiredCount: 5,
+    currentCount: 0,
+  },
+  {
+    id: 'memory_star',
+    title: 'Siêu Trí Nhớ',
+    description: 'Hoàn thành 1 trò chơi lật hình',
+    icon: '🧠',
+    unlocked: false,
+    requiredCount: 1,
+    currentCount: 0,
+  },
+  {
+    id: 'friend_owl',
+    title: 'Bạn Của Cú Cú',
+    description: 'Trò chuyện hoặc nghe câu chuyện từ Cú Cú',
+    icon: '🦉',
+    unlocked: false,
+    requiredCount: 1,
+    currentCount: 0,
+  },
+];

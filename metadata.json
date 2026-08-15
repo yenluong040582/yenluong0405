@@ -1,0 +1,6 @@
+{
+  "name": "Tìm hiểu về các con vật",
+  "description": "Ứng dụng giúp học sinh mầm non ôn tập về các con vật - Tác giả: Cô Lương Thị Ngọc Yến AI. Tích hợp chọn bài, mức độ nhận biết/thông hiểu/vận dụng và bộ câu hỏi tối đa 15 câu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
