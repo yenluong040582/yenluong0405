@@ -84,9 +84,9 @@ export const ReviewQuizView: React.FC<ReviewQuizViewProps> = ({
   // Read full question and option answers in Hanoi preschool teacher voice
   const handleReadFullQuestionAndOptions = (q: QuizQuestion, studentName?: string) => {
     if (!soundEnabled) return;
-    const optionLabels = ['A', 'B', 'C', 'D'];
+    const optionLabels = ['Á', 'Bê', 'Cê', 'Đê'];
     const optionsSpeech = q.options
-      .map((opt, i) => `Đáp án ${optionLabels[i]}: ${opt.text}`)
+      .map((opt, i) => `Đáp án ${optionLabels[i] || i + 1}: ${opt.text}`)
       .join('. ');
 
     let speechPrefix = '';
@@ -95,14 +95,16 @@ export const ReviewQuizView: React.FC<ReviewQuizViewProps> = ({
     }
 
     const speechText = `${speechPrefix}Câu hỏi dành cho các con là: ${q.prompt}. ${optionsSpeech}`;
-    soundEngine.speakVietnamese(speechText);
+    soundEngine.speakWithGeminiTTS(speechText);
   };
 
   // Read single option in Vietnamese
   const handleReadSingleOption = (e: React.MouseEvent, label: string, optionText: string) => {
     e.stopPropagation(); // prevent clicking option
     if (!soundEnabled) return;
-    soundEngine.speakVietnamese(`Đáp án ${label}: ${optionText}`);
+    const labelMap: Record<string, string> = { 'A': 'Á', 'B': 'Bê', 'C': 'Cê', 'D': 'Đê' };
+    const vnLabel = labelMap[label] || label;
+    soundEngine.speakWithGeminiTTS(`Đáp án ${vnLabel}: ${optionText}`);
   };
 
   // Start the customized test with complete backfill guarantee & student turn setup
@@ -156,11 +158,11 @@ export const ReviewQuizView: React.FC<ReviewQuizViewProps> = ({
     if (soundEnabled && finalSet.length > 0) {
       const firstStudent = students[0];
       if (playMode === 'turn_based') {
-        soundEngine.speakVietnamese(
+        soundEngine.speakWithGeminiTTS(
           `Xin chào các con! Hôm nay cô và các con lớp ${classNameVal} cùng tham gia một hoạt động thật vui nhé! Bây giờ cô mời bạn ${firstStudent} lắng nghe câu hỏi đầu tiên nào!`
         );
       } else {
-        soundEngine.speakVietnamese(
+        soundEngine.speakWithGeminiTTS(
           `Xin chào các con! Hôm nay cô và các con lớp ${classNameVal} cùng tham gia bài ôn tập thật vui nhé! Các con hãy lắng nghe câu hỏi nào!`
         );
       }
@@ -214,7 +216,7 @@ export const ReviewQuizView: React.FC<ReviewQuizViewProps> = ({
           ? `Giỏi quá! Bạn ${currentStudent} đã trả lời chính xác rồi! Cô khen ${currentStudent} nhé!`
           : 'Giỏi quá! Con đã trả lời chính xác rồi! Cô khen con!';
 
-        setTimeout(() => soundEngine.speakVietnamese(praiseText), 300);
+        setTimeout(() => soundEngine.speakWithGeminiTTS(praiseText), 300);
       }
     } else {
       if (soundEnabled) {
@@ -223,7 +225,7 @@ export const ReviewQuizView: React.FC<ReviewQuizViewProps> = ({
           ? `Không sao đâu bạn ${currentStudent} ơi! Con thử suy nghĩ lại và cố gắng ở câu tiếp theo nhé!`
           : 'Không sao đâu con! Con thử suy nghĩ lại và cố gắng ở câu tiếp theo nhé!';
 
-        setTimeout(() => soundEngine.speakVietnamese(encourageText), 300);
+        setTimeout(() => soundEngine.speakWithGeminiTTS(encourageText), 300);
       }
     }
   };
@@ -236,7 +238,7 @@ export const ReviewQuizView: React.FC<ReviewQuizViewProps> = ({
 
       if (soundEnabled) {
         if (playMode === 'turn_based') {
-          soundEngine.speakVietnamese(`Rất giỏi! Bây giờ chúng mình cùng đến với lượt của bạn ${nextStudent} nào!`);
+          soundEngine.speakWithGeminiTTS(`Rất giỏi! Bây giờ chúng mình cùng đến với lượt của bạn ${nextStudent} nào!`);
           setTimeout(() => {
             handleReadFullQuestionAndOptions(activeQuestions[nextIdx], nextStudent);
           }, 1200);
@@ -250,11 +252,11 @@ export const ReviewQuizView: React.FC<ReviewQuizViewProps> = ({
       if (soundEnabled) {
         soundEngine.playSuccessSound();
         if (playMode === 'turn_based') {
-          soundEngine.speakVietnamese(
+          soundEngine.speakWithGeminiTTS(
             `Hoan hô tất cả các con lớp ${classNameVal}! Các con đã hoàn thành xuất sắc bài ôn tập rồi! Cô khen cả lớp chúng mình nhé!`
           );
         } else {
-          soundEngine.speakVietnamese(
+          soundEngine.speakWithGeminiTTS(
             `Hoan hô con! Con đã hoàn thành xuất sắc bài ôn tập đạt ${score} trên ${activeQuestions.length} câu đúng! Cô khen con rất nhiều!`
           );
         }

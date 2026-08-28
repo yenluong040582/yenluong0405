@@ -97,7 +97,7 @@ export const MemoryGameView: React.FC<MemoryGameViewProps> = ({ soundEnabled, on
               setIsWon(true);
               if (soundEnabled) {
                 soundEngine.playSuccessSound();
-                setTimeout(() => soundEngine.speakVietnamese('Hoan hô các con! Con đã tìm được tất cả các cặp con vật rồi! Cô khen con rất giỏi nhé!'), 300);
+                setTimeout(() => soundEngine.speakWithGeminiTTS('Hoan hô các con! Con đã tìm được tất cả các cặp con vật rồi! Cô khen con rất giỏi nhé!'), 300);
               }
               confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
               onGameCompleted();
@@ -106,7 +106,7 @@ export const MemoryGameView: React.FC<MemoryGameViewProps> = ({ soundEnabled, on
           });
 
           if (soundEnabled) {
-            soundEngine.speakVietnamese(card1.animal.name);
+            soundEngine.speakWithGeminiTTS(card1.animal.name);
           }
         }, 500);
       } else {

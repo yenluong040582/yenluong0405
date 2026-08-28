@@ -1,6 +1,6 @@
 {
   "name": "Tìm hiểu về các con vật",
-  "description": "Ứng dụng giúp học sinh mầm non ôn tập về các con vật - Tác giả: Cô Lương Thị Ngọc Yến AI. Tích hợp chọn bài, mức độ nhận biết/thông hiểu/vận dụng và bộ câu hỏi tối đa 15 câu.",
+  "description": "Ứng dụng web học tập tương tác về 50 loài động vật cho trẻ em với giao diện xanh lá tươi sáng, font chữ Quicksand, 4 nút trắc nghiệm và ô nhập tự do, phát âm thông minh Gemini TTS tiếng Việt, pháo hoa ăn mừng và hệ thống tính điểm.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -11,7 +11,7 @@ import { BadgesView } from './components/BadgesView';
 import { Heart } from 'lucide-react';
 
 export default function App() {
-  const [currentTab, setTab] = useState<AppTab>('review');
+  const [currentTab, setTab] = useState<AppTab>('quiz');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [classNameVal, setClassNameVal] = useState<string>('Chồi 1');
   const [stars, setStars] = useState<number>(50); // Start with 50 stars gift for kids!
@@ -114,7 +114,7 @@ export default function App() {
   const unlockedBadgeCount = badges.filter((b) => b.unlocked).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-blue-50 to-orange-50 text-slate-900 font-sans selection:bg-sky-200">
+    <div className="min-h-screen bg-gradient-to-b from-emerald-50/70 via-lime-50/40 to-amber-50/70 text-slate-900 font-sans selection:bg-emerald-200">
       {/* Header */}
       <Header
         currentTab={currentTab}
@@ -128,6 +128,13 @@ export default function App() {
 
       {/* Main Content View */}
       <main className="max-w-6xl mx-auto px-4 pt-6 pb-12">
+        {currentTab === 'quiz' && (
+          <QuizGameView
+            soundEnabled={soundEnabled}
+            onCorrectAnswer={handleQuizCorrect}
+          />
+        )}
+
         {currentTab === 'review' && (
           <ReviewQuizView
             soundEnabled={soundEnabled}
@@ -141,13 +148,6 @@ export default function App() {
           <FlashcardsView
             soundEnabled={soundEnabled}
             onCardExplored={handleCardExplored}
-          />
-        )}
-
-        {currentTab === 'quiz' && (
-          <QuizGameView
-            soundEnabled={soundEnabled}
-            onCorrectAnswer={handleQuizCorrect}
           />
         )}
 
@@ -174,16 +174,16 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-sky-100/90 border-t-2 border-sky-300 py-6 text-center text-sky-950 font-bold text-sm px-4">
+      <footer className="bg-emerald-900 text-white py-6 text-center text-sm px-4 border-t-4 border-emerald-700 shadow-inner">
         <div className="max-w-4xl mx-auto space-y-2">
-          <div className="flex items-center justify-center gap-2 text-orange-600">
-            <Heart className="w-5 h-5 fill-orange-500 text-orange-500 animate-pulse" />
+          <div className="flex items-center justify-center gap-2 text-amber-300">
+            <Heart className="w-5 h-5 fill-amber-400 text-amber-400 animate-pulse" />
             <span className="text-base font-black">
-              Tìm hiểu về các con vật — Tác giả Cô Lương Thị Ngọc Yến AI
+              Ứng Dụng Học Tập 50 Con Vật Cho Trẻ Em — Cô Giáo Lương Thị Ngọc Yến AI
             </span>
           </div>
-          <p className="text-sky-900 text-xs font-semibold">
-            Lớp học: {classNameVal} • Ngân hàng câu hỏi đủ số lượng • Đọc câu hỏi & đáp án bằng Tiếng Việt • Âm thanh & Tung bông tung hoa mừng đúng
+          <p className="text-emerald-200 text-xs font-semibold">
+            Bộ dữ liệu 50 loài động vật • 4 nút trắc nghiệm & Ô nhập tự do • Gemini AI TTS Phát âm tiếng Việt • Pháo hoa ăn mừng & Tặng sao
           </p>
         </div>
       </footer>

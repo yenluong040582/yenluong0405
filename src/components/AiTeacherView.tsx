@@ -11,16 +11,16 @@ interface AiTeacherViewProps {
 export const AiTeacherView: React.FC<AiTeacherViewProps> = ({ soundEnabled, onAskedOwl }) => {
   const [prompt, setPrompt] = useState<string>('');
   const [response, setResponse] = useState<string>(
-    'Xin chào bé ngoan! Thầy là Cú Cú thông thái đây! Bé muốn hỏi thầy điều gì về thế giới con vật rực rỡ hôm nay nè?'
+    'Xin chào bé ngoan! Cô là Cú Mèo thông thái đây! Bé muốn hỏi cô điều gì về thế giới con vật rực rỡ hôm nay nè?'
   );
   const [loading, setLoading] = useState<boolean>(false);
 
   const predefinedPrompts = [
-    { label: '🧩 Xin 1 câu đố vui con vật', mode: 'riddle', text: 'Thầy Cú Cú đố bé 1 câu đố vui về con vật nhé!' },
-    { label: '📖 Kể câu chuyện bạn Voi', mode: 'story', text: 'Thầy Cú Cú kể cho bé nghe một câu chuyện ngắn đáng yêu về bạn Voi tốt bụng!' },
-    { label: '🍎 Con thỏ thích ăn gì?', mode: 'ask', text: 'Tại sao con thỏ lại thích ăn củ cà rốt vậy thầy Cú Cú?' },
-    { label: '🐯 Con hổ sống ở đâu?', mode: 'ask', text: 'Con hổ sống ở đâu và tại sao chú ấy lại gầm to thế thầy?' },
-    { label: '🐬 Cá heo thông minh thế nào?', mode: 'ask', text: 'Thầy ơi, cá heo sống ở biển có thông minh không ạ?' },
+    { label: '🧩 Xin 1 câu đố vui con vật', mode: 'riddle', text: 'Cô Cú Mèo đố bé 1 câu đố vui về con vật nhé!' },
+    { label: '📖 Kể câu chuyện bạn Voi', mode: 'story', text: 'Cô Cú Mèo kể cho bé nghe một câu chuyện ngắn đáng yêu về bạn Voi tốt bụng!' },
+    { label: '🍎 Con thỏ thích ăn gì?', mode: 'ask', text: 'Tại sao con thỏ lại thích ăn củ cà rốt vậy cô Cú Mèo?' },
+    { label: '🐯 Con hổ sống ở đâu?', mode: 'ask', text: 'Con hổ sống ở đâu và tại sao chú ấy lại gầm to thế cô ơi?' },
+    { label: '🐬 Cá heo thông minh thế nào?', mode: 'ask', text: 'Cô ơi, cá heo sống ở biển có thông minh không ạ?' },
   ];
 
   const handleAsk = async (customText?: string, mode: string = 'ask') => {
@@ -39,15 +39,15 @@ export const AiTeacherView: React.FC<AiTeacherViewProps> = ({ soundEnabled, onAs
       if (data.text) {
         setResponse(data.text);
         if (soundEnabled) {
-          soundEngine.speakVietnamese(data.text);
+          soundEngine.speakWithGeminiTTS(data.text);
         }
         onAskedOwl();
       } else {
-        setResponse('Thầy Cú Cú chưa nghe rõ lắm, bé hỏi lại thầy nhé!');
+        setResponse('Cô Cú Mèo chưa nghe rõ lắm, bé hỏi lại cô nhé!');
       }
     } catch (e) {
       console.error(e);
-      setResponse('Thầy Cú Cú đang tìm sách giải đáp. Bé thử bấm lại lần nữa nha!');
+      setResponse('Cô Cú Mèo đang tìm sách giải đáp. Bé thử bấm lại lần nữa nha!');
     } finally {
       setLoading(false);
       setPrompt('');
@@ -56,7 +56,7 @@ export const AiTeacherView: React.FC<AiTeacherViewProps> = ({ soundEnabled, onAs
 
   const handleSpeakResponse = () => {
     if (response) {
-      soundEngine.speakVietnamese(response);
+      soundEngine.speakWithGeminiTTS(response);
     }
   };
 
@@ -70,10 +70,10 @@ export const AiTeacherView: React.FC<AiTeacherViewProps> = ({ soundEnabled, onAs
 
         <div className="text-center sm:text-left space-y-1">
           <h2 className="text-2xl sm:text-3xl font-black drop-shadow-md">
-            Thầy Giáo Cú Cú Thông Thái 🦉
+            Cô Giáo Cú Mèo Thông Thái 🦉
           </h2>
           <p className="text-indigo-100 font-bold text-sm sm:text-base">
-            Giải đáp mọi thắc mắc ngộ nghĩnh & kể chuyện con vật cho bé nghe!
+            Giải đáp mọi thắc mắc ngộ nghĩnh & kể chuyện con vật bằng giọng cô giáo ngọt ngào cho bé nghe!
           </p>
         </div>
       </div>
@@ -89,7 +89,7 @@ export const AiTeacherView: React.FC<AiTeacherViewProps> = ({ soundEnabled, onAs
               key={idx}
               onClick={() => handleAsk(item.text, item.mode)}
               disabled={loading}
-              className="bg-white hover:bg-amber-100 text-amber-950 font-bold text-xs sm:text-sm px-3.5 py-2 rounded-2xl border-2 border-amber-300 shadow-sm active:scale-95 transition-all flex items-center gap-1.5"
+              className="bg-white hover:bg-amber-100 text-amber-950 font-bold text-xs sm:text-sm px-3.5 py-2 rounded-2xl border-2 border-amber-300 shadow-sm active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>{item.label}</span>
             </button>
@@ -107,11 +107,11 @@ export const AiTeacherView: React.FC<AiTeacherViewProps> = ({ soundEnabled, onAs
         <div className="flex items-start gap-3">
           <div className="text-3xl shrink-0 mt-1">🦉</div>
           <div className="space-y-2 w-full">
-            <span className="font-black text-indigo-900 text-lg block">Thầy Cú Cú trả lời:</span>
+            <span className="font-black text-indigo-900 text-lg block">Cô Cú Mèo trả lời:</span>
             <p className="text-slate-800 font-bold text-lg leading-relaxed bg-indigo-50/80 p-4 rounded-2xl border border-indigo-100">
               {loading ? (
                 <span className="flex items-center gap-2 text-indigo-600">
-                  <Loader2 className="w-5 h-5 animate-spin" /> Thầy Cú Cú đang lật mở cuốn sách phép thuật...
+                  <Loader2 className="w-5 h-5 animate-spin" /> Cô Cú Mèo đang lật mở cuốn sách phép thuật...
                 </span>
               ) : (
                 response

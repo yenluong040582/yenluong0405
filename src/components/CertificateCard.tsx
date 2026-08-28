@@ -91,7 +91,7 @@ export const CertificateCard: React.FC<CertificateCardProps> = ({
     if (!soundEnabled) return;
     confetti({ particleCount: 50, spread: 70, origin: { y: 0.6 } });
     const fullText = `Giấy Chứng Nhận! Cô giáo khen tặng bé ${studentName}, Lớp ${classNameVal}. Con đã hoàn thành xuất sắc bài ôn tập ${lessonTitle}. Đạt kết quả ${score} trên ${totalQuestions} câu đúng, đạt ${grade.percentText}. Đạt xếp loại ${grade.rank}! ${grade.speech}`;
-    soundEngine.speakVietnamese(fullText);
+    soundEngine.speakWithGeminiTTS(fullText);
   };
 
   const handlePrint = () => {
